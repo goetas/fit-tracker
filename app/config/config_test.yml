@@ -1,16 +1,32 @@
 imports:
-    - { resource: config_dev.yml }
+    - { resource: config.yml }
+    - { resource: ../../tests/AppBundle/Resources/config/services.xml}
+
+services:
+    appbundle.session.array:
+        class: Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
 
 framework:
     test: ~
     session:
-        storage_id: session.storage.mock_file
+        storage_id: appbundle.session.array
     profiler:
         collect: false
 
-web_profiler:
-    toolbar: false
-    intercept_redirects: false
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        console:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
 
 swiftmailer:
     disable_delivery: true

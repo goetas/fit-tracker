@@ -16,7 +16,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    csrf_protection: ~
+    csrf_protection: false
     validation:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
     templating:
@@ -57,6 +57,12 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: false
+    filters:
+        cssrewrite: ~
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -64,3 +70,23 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+nelmio_api_doc:
+    sandbox:
+        enabled: false
+
+fos_rest:
+    body_listener: true
+    param_fetcher_listener: true
+    format_listener:
+        rules:
+          - { path: '^/api/doc$', priorities: ['html'], fallback_format: false, prefer_extension: false }
+          - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+          - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: true }
+    view:
+        view_response_listener: true
+        failed_validation: HTTP_BAD_REQUEST
+        formats:
+            json: true
+            xml: true
+            html: false

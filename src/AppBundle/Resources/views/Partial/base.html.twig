@@ -1,0 +1,13 @@
+<div id="wrapper">
+    {% import "AppBundle:Default:angular.html.twig" as angular %}
+    {% include 'AppBundle:Partial:nav.html.twig' %}
+
+    <div id="{{ "{{ ( place == 'home' || place == 'login' || place == 'register' ) ? 'home-wrapper' : 'page-wrapper' }}" }}">
+
+        <div ng-show="error" class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" ng-click="hideError()">×</button>
+            {{ '{{ error.message?error.message :error.error.message }}' }}
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+</div>

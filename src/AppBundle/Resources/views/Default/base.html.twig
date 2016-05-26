@@ -1,0 +1,61 @@
+{% import "AppBundle:Default:angular.html.twig" as angular %}
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets
+            'bundles/app/css/bootstrap.css'
+            'bundles/app/bower_components/metisMenu/dist/metisMenu.min.css'
+            'bundles/app/dist/css/timeline.css'
+            'bundles/app/dist/css/sb-admin-2.css'
+            'bundles/app/bower_components/morrisjs/morris.css'
+            'bundles/app/bower_components/font-awesome/css/font-awesome.min.css'
+            'bundles/app/css/angular-datepicker.css'
+            'bundles/app/css/fittracker.css'
+            filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" crossorigin="anonymous">
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script>
+                var configs = {{ {
+                    routing: {
+                        'root' :  path('homepage') | trim ("/"),
+
+                        'auth_logout' :  path('auth_logout'),
+                        'auth_login' :  path('auth_check'),
+
+                        'user_list' :  path('user_list'),
+                        'user_register' :  path('user_register'),
+                    }
+                } | json_encode |raw}};
+                configs.user = {{ user|serialize | raw }};
+            </script>
+            {% javascripts
+            '@AppBundle/Resources/public/js/jquery-2.2.4.js'
+            '@AppBundle/Resources/public/js/angular.js'
+            '@AppBundle/Resources/public/js/angular-route.js'
+            '@AppBundle/Resources/public/js/bootstrap.js'
+            '@AppBundle/Resources/public/js/moment.js'
+            '@AppBundle/Resources/public/js/angular-datepicker.js'
+            '@AppBundle/Resources/public/bower_components/metisMenu/dist/metisMenu.min.js'
+            '@AppBundle/Resources/public/bower_components/raphael/raphael-min.js'
+            '@AppBundle/Resources/public/bower_components/morrisjs/morris.min.js'
+            '@AppBundle/Resources/public/dist/js/sb-admin-2.js'
+
+            '@AppBundle/Resources/app/app.common.js'
+            '@AppBundle/Resources/app/app.config.js'
+            '@AppBundle/Resources/app/controller/*.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </body>
+</html>
+

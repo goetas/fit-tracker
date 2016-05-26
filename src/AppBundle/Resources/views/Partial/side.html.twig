@@ -1,0 +1,36 @@
+<div class="navbar-default sidebar" role="navigation" ng-show="user && place != 'home'">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li>
+                <a href="#/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="#/activities">
+                    <i class="glyphicon glyphicon-time"></i>
+                    Activities
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#/activities-report"> <i class="fa fa-file-text-o fa-fw"></i>Weekly report</a>
+                    </li>
+                    <li>
+                        <a href="#/activities/new"> <i class="fa fa-plus fa-fw"></i>Add</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li ng-show="user.is_admin">
+                <a href="#/users">
+                    <i class="fa fa-user fa-fw"></i>
+                    Users
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#/users/new"> <i class="fa fa-plus fa-fw"></i>Add</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>

@@ -1,12 +1,16 @@
 /web/bundles/
+/web/js/
+/web/js/*
+.idea
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
 /app/logs/*
+/phpunit.xml
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 /app/phpunit.xml
+/.docker_data
 /build/
 /vendor/
 /bin/
-/composer.phar

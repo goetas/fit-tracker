@@ -3,22 +3,36 @@
 security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    encoders:
+        AppBundle\Entity\User: bcrypt
+
     providers:
-        in_memory:
-            memory: ~
+        db_user_provider:
+            entity:
+                class: AppBundle:User
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        main:
+        login:
+            pattern:  ^/api/auth
             anonymous: ~
-            # activate different ways to authenticate
+            provider: db_user_provider
+            context: my
+            guard:
+              authenticators:
+                - app.token_authenticator
+            logout:
+                path: auth_logout
+                target: /
+                invalidate_session: true
+        main:
+            pattern:  ^/
+            anonymous: ~
+            context: my
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    access_control:
+        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/doc, roles: ROLE_ADMIN }

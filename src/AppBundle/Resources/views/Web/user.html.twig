@@ -1,0 +1,71 @@
+{% extends 'AppBundle:Partial:base.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">User</h1>
+        </div>
+    </div>
+    <div class="row user-add">
+        <div class="panel panel-default">
+            <div class="panel-heading" ng-hide="aUser.id">
+                Add
+            </div>
+            <div class="panel-heading" ng-show="aUser.id">
+                Edit
+            </div>
+            <div class="panel-body">
+                <div class="panel-body">
+                    <form role="form">
+                        <div {{ angular.error_cls('form-group', 'is_admin') }}>
+                            <input type="checkbox" ng-model="aUser.is_admin"
+                                   ng-true-value="1" ng-false-value="0"> Admin
+                            {{ angular.error_label('is_admin') }}
+                        </div>
+
+                        <div {{ angular.error_cls('form-group', 'name') }}>
+                            <input class="form-control" placeholder="Name" ng-model="aUser.name" type="text"
+                                   autofocus >
+                            {{ angular.error_label('name') }}
+                        </div>
+                        <div {{ angular.error_cls('form-group input-group', 'email') }}>
+                            <span class="input-group-addon">@</span>
+                            <input class="form-control" placeholder="E-mail" ng-model="aUser.email" type="email"
+                                   required>
+                            {{ angular.error_label('email') }}
+                        </div>
+                        <div {{ angular.error_cls('form-group', 'password.children.first') }}>
+                            <input class="form-control" placeholder="Password" ng-model="aUser.password.first"
+                                   type="password"
+                                   value="">
+                            {{ angular.error_label('password.children.first') }}
+                        </div>
+                        <div {{ angular.error_cls('form-group', 'password.children.second') }}>
+                            <input class="form-control" placeholder="Repeat password"
+                                   ng-model="aUser.password.second"
+                                   type="password" value="">
+                            {{ angular.error_label('password.children.second') }}
+                        </div>
+
+                        <div class="actions">
+                            <button ng-hide="aUser.id" ng-click="doSave()" type="submit" class="btn btn-default"><i
+                                        class="fa fa-plus fa-fw"></i> Add
+                            </button>
+                            <button ng-hide="aUser.id" ng-click="doSave(true)" type="submit" class="btn btn-default"><i
+                                        class="fa fa-plus fa-fw"></i> Add and
+                                go to list
+                            </button>
+
+                            <button ng-show="aUser.id" ng-click="doSave()" type="submit" class="btn btn-default"><i
+                                        class="fa fa-save fa-fw"></i> Save
+                            </button>
+                            <button ng-show="aUser.id" ng-click="doSave(true)" type="submit" class="btn btn-default"><i
+                                        class="fa fa-save fa-fw"></i> Save and
+                                go to list
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

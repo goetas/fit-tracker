@@ -1,0 +1,52 @@
+{% extends 'AppBundle:Partial:base.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Register</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" novalidate>
+                        <fieldset>
+                            <div {{ angular.error_cls('form-group', 'name') }}>
+                                <input class="form-control" placeholder="Name" ng-model="formData.name" type="text"
+                                       autofocus required>
+                                {{ angular.error_label('name') }}
+                            </div>
+                            <div {{ angular.error_cls('form-group input-group', 'email') }}>
+                                <span class="input-group-addon">@</span>
+                                <input class="form-control" placeholder="E-mail" ng-model="formData.email" type="email"
+                                       required>
+                                {{ angular.error_label('email') }}
+                            </div>
+
+                            <div {{ angular.error_cls('form-group', 'password.children.first') }}>
+                                <input class="form-control" placeholder="Password" ng-model="formData.password.first"
+                                       required type="password"
+                                       value="">
+                                {{ angular.error_label('password.children.first') }}
+                            </div>
+                            <div {{ angular.error_cls('form-group', 'password.children.second') }}>
+                                <input class="form-control" placeholder="Repeat password" required
+                                       ng-model="formData.password.second"
+                                       type="password" value="">
+                                {{ angular.error_label('password.children.second') }}
+                            </div>
+                            <div {{ angular.error_cls('form-group checkbox', 'terms') }}>
+                                <label>
+                                    <input name="remember" type="checkbox" ng-model="formData.terms" required>Accept
+                                    terms and conditions
+                                </label>
+
+                                {{ angular.error_label('terms') }}
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <a ng-click="doRegister()" class="btn btn-lg btn-success btn-block">Register</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

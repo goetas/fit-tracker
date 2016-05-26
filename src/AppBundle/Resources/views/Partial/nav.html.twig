@@ -1,0 +1,50 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header"  ng-hide="home">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/">Fit Tracker</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right"  ng-show="user">
+        <li class="dropdown"  ng-show="user && place == 'home'">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#/dashboard">
+                <i class="fa fa-user fa-fw"></i> Dashboard
+            </a>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ '{{ user.name }}' }}  <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a href="#profile"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                </li>
+                <li class="divider"></li>
+                <li><a ng-click="doLogout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <ul class="nav navbar-top-links navbar-right" ng-hide="user">
+        <li class="dropdown" ng-hide="register">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#/register">
+                <i class="fa fa-user fa-fw"></i> Register
+            </a>
+        </li>
+        <li class="dropdown" ng-hide="login">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#/login">
+                <i class="fa fa-user fa-fw"></i>  Login
+            </a>
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+
+    {% include 'AppBundle:Partial:side.html.twig' %}
+</nav>

@@ -1,0 +1,45 @@
+{% extends 'AppBundle:Partial:base.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Profile</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Edit profile
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div {{ angular.error_cls('form-group', 'name') }}>
+                        <input class="form-control" placeholder="Name" ng-model="user.name" type="text"
+                               autofocus >
+                        {{ angular.error_label('name') }}
+                    </div>
+                    <div {{ angular.error_cls('form-group input-group', 'email') }}>
+                        <span class="input-group-addon">@</span>
+                        <input class="form-control" placeholder="E-mail" ng-model="user.email" type="email"
+                               required>
+                        {{ angular.error_label('email') }}
+                    </div>
+                    <div {{ angular.error_cls('form-group', 'password.children.first') }}>
+                        <input class="form-control" placeholder="Password" ng-model="user.password.first"
+                                type="password"
+                               value="">
+                        {{ angular.error_label('password.children.first') }}
+                    </div>
+                    <div {{ angular.error_cls('form-group', 'password.children.second') }}>
+                        <input class="form-control" placeholder="Repeat password"
+                               ng-model="user.password.second"
+                               type="password" value="">
+                        {{ angular.error_label('password.children.second') }}
+                    </div>
+
+                    <button ng-click="doSave()" type="submit" class="btn btn-default"> <i class="fa fa-save fa-fw"></i> Save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

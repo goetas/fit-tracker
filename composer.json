@@ -1,16 +1,19 @@
 {
-  "name": "symfony/framework-standard-edition",
+  "name": "asmir-mustafic/fittracker-fit",
   "license": "MIT",
   "type": "project",
-  "description": "The \"Symfony Standard Edition\" distribution",
   "autoload": {
     "psr-4": {
-      "": "src/"
+      "AppBundle\\": "src/AppBundle"
     },
     "classmap": [
-      "app/AppKernel.php",
-      "app/AppCache.php"
+      "app/AppKernel.php"
     ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AppBundle\\Tests\\": "tests"
+    }
   },
   "require": {
     "php": ">=5.3.9",
@@ -24,34 +27,33 @@
     "incenteev/composer-parameter-handler": "~2.0",
     "willdurand/hateoas-bundle": "^1.1",
     "friendsofsymfony/rest-bundle": "^1.7",
-    "jms/serializer": "^1.0"
+    "jms/serializer": "master-dev",
+    "symfony/assetic-bundle": "^2.8",
+    "nelmio/api-doc-bundle":"^2.0"
   },
   "require-dev": {
     "sensio/generator-bundle": "~3.0",
-    "symfony/phpunit-bridge": "~2.7"
+    "phpunit/phpunit": "^5.0",
+    "symfony/psr-http-message-bridge": "^0.2.0",
+    "zendframework/zend-diactoros": "^1.1",
+    "guzzlehttp/guzzle": "^6.0",
+    "h4cc/alice-fixtures-bundle": "^0.5.1",
+    "fzaninotto/faker": "dev-master#9897868a99df5f012e621eda405172dc22ec4bd5"
   },
   "scripts": {
     "post-install-cmd": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
     ],
     "post-update-cmd": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-      7
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
     ]
   },
   "config": {
-    "bin-dir": "bin",
-    "platform": {
-      "php": "5.3.9"
-    }
+    "bin-dir": "bin"
   },
   "extra": {
     "symfony-app-dir": "app",

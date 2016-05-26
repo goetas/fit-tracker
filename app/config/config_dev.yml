@@ -11,6 +11,10 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+jms_serializer:
+    visitors:
+        json:
+            options: JSON_PRETTY_PRINT
 monolog:
     handlers:
         main:

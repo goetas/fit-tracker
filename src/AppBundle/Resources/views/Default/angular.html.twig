@@ -1,0 +1,7 @@
+{% macro error_label(exp) %}
+    <span style="clear: both" class="help-block" ng-show="error.errors.children.{{ exp }}.errors">{{ '{{ error.errors.children.' }} {{ (exp ~ ".errors.join('. ')")  | raw}} {{ '}} ' }}</span>
+{% endmacro %}
+
+{% macro error_cls(clss, expr) %}
+    ng-class="[{{ clss | angularjs_class_array|raw }} , {'has-error': error.errors.children.{{ expr }}.errors }]"
+{% endmacro %}

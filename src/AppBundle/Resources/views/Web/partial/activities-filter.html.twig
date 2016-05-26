@@ -1,0 +1,28 @@
+<div class="panel-heading">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group  date thedatepicker">
+
+                <label>From</label>
+                <div class="input-group">
+                    <input class="form-control" readonly ng-model="filters.from" type="text">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group date thedatepicker">
+                <label>To</label>
+                <div class="input-group">
+                    <input class="form-control" readonly ng-model="filters.to" type="text">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button ng-click="doFilter()" type="submit" class="btn btn-default apply-filter">
+                <i class="glyphicon glyphicon-filter"></i> Filter
+            </button>
+        </div>
+    </div>
+</div>

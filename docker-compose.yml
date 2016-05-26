@@ -1,0 +1,33 @@
+version: '2'
+services:
+    db:
+      image: mysql
+      ports:
+          - "3307:3306"
+      volumes:
+          - .docker_data/mysql-data:/var/lib/mysql
+      environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: fittracker
+          MYSQL_USER: fittracker
+          MYSQL_PASSWORD: fittracker
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    php:
+        build: ./docker/php-fpm
+        volumes:
+            - .:/var/www/html
+    nginx:
+        build:
+          context: ./docker/nginx
+          args:
+            APP_SERVER_NAME: fittracker.dev
+            APP_SERVER_ROOT: /var/www/html/web
+            PHP_FPM_HOST: php
+        ports:
+            - "8080:80"
+        links:
+            - php
+        volumes_from:
+            - php
+        volumes:
+            - .docker_data/logs/nginx/:/var/log/nginx

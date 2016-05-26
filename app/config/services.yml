@@ -1,9 +1,39 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.token_authenticator:
+        class: AppBundle\Security\JsonPostAuthenticator
+        arguments: ['@doctrine.orm.entity_manager', '@security.encoder_factory', '@serializer']
+
+    app.twig_extension:
+      class: AppBundle\Twig\AppExtension
+      public: false
+      tags:
+      - { name: twig.extension }
+
+    app.security.password_encoder:
+      class: AppBundle\Security\PasswordEncoder
+      arguments: ['@security.encoder_factory']
+      tags:
+      - { name: doctrine.event_listener, event: preUpdate }
+      - { name: doctrine.event_listener, event: prePersist }
+
+    app.doctrine.repository.user:
+      class: AppBundle\Repository\UserRepository
+      factory: ["@doctrine.orm.default_entity_manager", getRepository]
+      arguments: ['AppBundle\Entity\User']
+
+    app.doctrine.repository.activity:
+      class: AppBundle\Repository\ActivityRepository
+      factory: ["@doctrine.orm.default_entity_manager", getRepository]
+      arguments: ['AppBundle\Entity\Activity']
+
+    app.request_param_converter.user_param_converter:
+        class: AppBundle\Param\UserParamConverter
+        arguments: ['@app.doctrine.repository.user', '@security.authorization_checker', '@security.token_storage']
+        tags:
+            - { name: request.param_converter, converter: user_param_converter }
+
+    app.request_param_converter.activity_param_converter:
+        class: AppBundle\Param\ActivityParamConverter
+        arguments: ['@app.doctrine.repository.activity', '@security.authorization_checker', '@security.token_storage']
+        tags:
+            - { name: request.param_converter, converter: activity_param_converter }
